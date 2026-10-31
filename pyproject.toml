@@ -1,0 +1,24 @@
+[project]
+name = "xiv-craftcalc"
+version = "0.1.0"
+description = "FFXIV crafting profit calculator TUI (Universalis + XIVAPI)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["textual>=1.0", "httpx>=0.27"]
+
+[project.scripts]
+craftcalc = "xiv_craftcalc.app:main"
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/xiv_craftcalc"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+asyncio_mode = "auto"

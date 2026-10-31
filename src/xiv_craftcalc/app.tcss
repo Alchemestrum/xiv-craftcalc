@@ -1,0 +1,111 @@
+Screen {
+    background: #0b0b12;
+    color: #c8cbe0;
+}
+
+/* ── top bar ─────────────────────────────────────────────── */
+#topbar {
+    height: 3;
+    padding: 1 1 0 1;
+}
+.sym {
+    padding: 0 1;
+    text-style: bold;
+}
+.sym.dc    { color: #b450ff; }
+.sym.world { color: #00e5ff; }
+.sym.hq    { color: #ffd23f; }
+.sym.tax   { color: #ff9f1c; }
+.sym.want  { color: #3cff8f; }
+.sym.sell  { color: #ff5fd2; }
+#dc    { width: 30; }
+#world { width: 22; }
+#hq    { height: 1; border: none; padding: 0; margin: 0 1 0 0; }
+#tax   { width: 6; }
+#status { width: 1fr; content-align: right middle; padding: 0 1; }
+
+Select > SelectCurrent { background: #161626; }
+Input { background: #161626; }
+Input:focus { background: #221b38; }
+
+/* ── search ──────────────────────────────────────────────── */
+#searchbox {
+    height: auto;
+    margin: 0 1;
+}
+#search {
+    border: round #b450ff 60%;
+    background: #0b0b12;
+}
+#search:focus { border: round #b450ff; }
+#results {
+    max-height: 12;
+    border: round #00e5ff 50%;
+    background: #10101c;
+}
+
+/* ── recipe bar ──────────────────────────────────────────── */
+#recipebar {
+    height: 2;
+    padding: 1 1 0 1;
+}
+#title    { width: auto; padding-right: 2; }
+#target   { width: 8; }
+#sellprice { width: 10; }
+#sellinfo { width: 1fr; padding-left: 2; }
+
+/* ── materials table ─────────────────────────────────────── */
+#header {
+    height: 2;
+    margin: 1 0 0 0;
+    color: #ff5fd2;
+    text-style: bold;
+    border-bottom: solid #88001b;
+}
+#mats {
+    height: 1fr;
+    padding: 0 1;
+    scrollbar-color: #b450ff 40%;
+}
+.row {
+    height: 1;
+    padding: 0 1;
+}
+#mats .row { padding: 0; }
+.row.inactive { color: #3d4256; }
+.row.inactive Input { color: #3d4256; }
+
+.c-name   { width: 30; color: #00e5ff; }
+.c-mode   { width: 9; min-width: 9; }
+.c-need   { width: 8; content-align: right middle; color: #c77dff; }
+.c-price  { width: 10; margin-left: 1; }
+.c-bought { width: 9; margin-left: 1; }
+.c-cost   { width: 11; content-align: right middle; color: #ffd23f; }
+.c-short  { width: 9; content-align: right middle; }
+.c-mkt    { width: 1fr; padding-left: 2; }
+#header .c-price, #header .c-bought { content-align: right middle; }
+.row.inactive .c-name { color: #3d4256; }
+
+Button.c-mode {
+    background: #1d1530;
+    color: #ffd23f;
+    border: none;
+}
+Button.c-mode:hover { background: #2d2048; }
+
+/* ── summary ─────────────────────────────────────────────── */
+#summary {
+    height: 7;
+    padding: 0 1;
+}
+.panel {
+    width: 1fr;
+    padding: 0 2;
+    border: round #88001b;
+    border-title-color: #ff5fd2;
+    border-title-style: bold;
+}
+#plan   { border: round #b450ff 70%; }
+#actual { border: round #00e5ff 60%; }
+
+Footer { background: #10101c; }
