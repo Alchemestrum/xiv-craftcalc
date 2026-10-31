@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows-latest
@@ -42,7 +43,7 @@ jobs:
           SEP=$(python -c "import os; print(os.pathsep)")
           pyinstaller -y --onefile --name craftcalc \
             --distpath dist --workpath build/work --specpath build \
-            --add-data "$PWD/src/xiv_craftcalc/app.tcss${SEP}xiv_craftcalc" \
+            --add-data "../src/xiv_craftcalc/app.tcss${SEP}xiv_craftcalc" \
             --collect-submodules textual --collect-submodules rich \
             packaging/craftcalc.py
           if [ -f dist/craftcalc.exe ]; then mv dist/craftcalc.exe "dist/${{ matrix.asset }}"; else mv dist/craftcalc "dist/${{ matrix.asset }}"; fi
