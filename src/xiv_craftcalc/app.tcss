@@ -74,6 +74,8 @@ Input:focus { background: #221b38; }
 #mats .row { padding: 0; }
 .row.inactive { color: #3d4256; }
 .row.inactive Input { color: #3d4256; }
+.row Input.-invalid { background: #161626; background-tint: 0%; }
+.row Input:disabled, .row Input.-invalid:disabled { color: #3d4256; background: #0f0f18; }
 
 .c-name   { width: 30; color: #00e5ff; }
 .c-mode   { width: 9; min-width: 9; }

@@ -76,6 +76,8 @@ class MatRow(Horizontal):
         event.stop()
         self.node.mode = BUY if self.node.mode == CRAFT else CRAFT
         event.button.label = self._mode_label()
+        if self.node.mode == CRAFT:
+            self.query_one(".c-bought", Input).value = ""
         self.app.recalc()
 
     @on(Input.Changed, ".c-price")
@@ -94,6 +96,12 @@ class MatRow(Horizontal):
     def refresh_values(self) -> None:
         n, m = self.node, self.node.market
         self.set_class(not n.active, "inactive")
+        # crafting it: its own boxes are unused. Buying it: its mats are unused.
+        locked = not n.active or (n.mode == CRAFT and n.craftable)
+        for box in self.query(".c-price, .c-bought").results(Input):
+            box.disabled = locked
+        if not n.active and n.bought:
+            self.query_one(".c-bought", Input).value = ""
         self.query_one(".c-need", Static).update(gil(n.need) if n.active else "·")
         cost = n.bought * n.price
         self.query_one(".c-cost", Static).update(gil(cost) if n.active and cost else "")
