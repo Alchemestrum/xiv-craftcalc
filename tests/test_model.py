@@ -92,3 +92,30 @@ def test_pick_cheapest_mode():
     by_name(root, "Sanctified Water").price = 100
     root.pick_cheapest_mode()
     assert by_name(root, "Sanctified Water").mode == BUY
+
+
+def test_zero_means_on_hand_and_free():
+    root = gemdraught()
+    by_name(root, "Yollal").bought = 6  # only Yollal entered
+    r = calculate(root, target=30, sell_price=1000, tax=0)
+    assert r.can_craft == 6
+    assert r.limiting == "Yollal"
+    assert r.spent == 12000
+    assert r.profit == 18 * 1000 - 12000
+
+
+def test_nothing_entered_uses_target():
+    r = calculate(gemdraught(), target=30, sell_price=1000, tax=0)
+    assert r.can_craft == 10
+    assert r.can_make == 30
+    assert r.spent == 0
+    assert r.limiting == ""
+
+
+def test_zero_subcraft_mats_are_free():
+    root = gemdraught()
+    by_name(root, "Sanctified Water").mode = CRAFT
+    by_name(root, "Spring Water").bought = 2  # 1 sub-craft -> 3 water
+    r = calculate(root, target=30, sell_price=1000, tax=0)
+    assert r.can_craft == 3
+    assert r.limiting == "Spring Water"

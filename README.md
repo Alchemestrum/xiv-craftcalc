@@ -46,7 +46,7 @@ Or with plain pip: `python -m venv .venv && .venv/bin/pip install -e .`
 |---|---|
 | need | How many the plan needs (greyed out if the parent is set to buy) |
 | price ea | Unit price used in the math |
-| bought | What you have; drives the right-hand summary |
+| bought | What you bought for this craft; leave 0 for anything already on hand (free, never limits crafts) |
 | spent | bought x price |
 | to buy | Still missing (red), covered (✔), or ⚒N sub-crafts to make |
 | DC cheapest | Cheapest listing on the DC and its world, ⌀ average sale, ⚒ cost to craft one yourself |

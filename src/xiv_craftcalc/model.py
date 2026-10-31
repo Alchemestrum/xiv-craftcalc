@@ -113,22 +113,29 @@ def _plan(node: Node, parent_crafts: int, active: bool) -> int:
     return node.need * node.price if active else 0
 
 
-def _available(node: Node) -> tuple[int, str]:
-    """Units of this node on hand (bought plus what its bought mats can make)."""
+def _available(node: Node) -> tuple[int | None, str]:
+    """Units of this node on hand. None = left at 0, assumed owned / free."""
     if node.mode == CRAFT and node.craftable:
         crafts, limiting = _possible_crafts(node)
+        if crafts is None:
+            return None, ""
         return node.bought + crafts * node.yields, limiting
+    if not node.bought:
+        return None, ""
     return node.bought, node.name
 
 
-def _possible_crafts(recipe: Node) -> tuple[int, str]:
+def _possible_crafts(recipe: Node) -> tuple[int | None, str]:
+    """Crafts the entered quantities allow. None = nothing entered limits it."""
     best, limiting = None, ""
     for c in recipe.children:
         have, lim = _available(c)
+        if have is None:
+            continue
         n = have // c.amount
         if best is None or n < best:
             best, limiting = n, lim
-    return best or 0, limiting
+    return best, limiting
 
 
 def calculate(root: Node, target: int, sell_price: int, tax: float) -> Result:
@@ -137,6 +144,8 @@ def calculate(root: Node, target: int, sell_price: int, tax: float) -> Result:
     planned_items = crafts * root.yields
 
     can_craft, limiting = _possible_crafts(root)
+    if can_craft is None:  # every material left at 0: assume all on hand
+        can_craft = crafts
     spent = sum(n.bought * n.price for _, n in root.walk() if n.active)
     can_make = can_craft * root.yields
 
