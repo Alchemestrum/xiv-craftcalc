@@ -16,7 +16,22 @@ Prices come from [Universalis](https://universalis.app) and recipes from [XIVAPI
 - **Buy or craft** toggle for sub-crafts (like Sanctified Water), defaulting to whichever is cheaper
 - **HQ / NQ** sell price, units sold per day on the sell world, and adjustable tax (5% default, 3% or 0% in cheaper cities)
 
-## Install
+## Download
+
+Grab the latest build from the [Releases](../../releases) page. No Python needed.
+
+**Windows** (`craftcalc-windows-x64.exe`)
+1. Download it and double-click. It opens in Windows Terminal (default on Windows 11; on Windows 10 install [Windows Terminal](https://aka.ms/terminal) from the Microsoft Store for the best look).
+2. The first time, Windows SmartScreen may say "Windows protected your PC" because the file isn't code-signed. Click **More info**, then **Run anyway**.
+
+**Linux** (`craftcalc-linux-x64`)
+```bash
+chmod +x craftcalc-linux-x64
+./craftcalc-linux-x64
+```
+Optionally move it onto your PATH, e.g. `mv craftcalc-linux-x64 ~/.local/bin/craftcalc`.
+
+## Install from source
 
 Requires Python 3.11+.
 
@@ -58,6 +73,14 @@ The **plan** panel assumes you buy exactly what's needed. The **with what you bo
 Universalis data is crowdsourced from players' uploads, so quiet items can be hours or days stale, and the cheapest listing is often only a few units. Check the in-game board before buying in bulk.
 
 Config is stored at `~/.config/xiv-craftcalc/config.json`.
+
+## Releasing
+
+Push a version tag and GitHub Actions builds both binaries and publishes a release:
+
+```bash
+git tag v0.1.0 && git push origin v0.1.0
+```
 
 ## Tests
 
